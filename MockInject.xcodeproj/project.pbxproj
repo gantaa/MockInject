@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7DAC51A01714B18C00F0C2EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DAC519F1714B18C00F0C2EF /* Foundation.framework */; };
-		7DAC51A51714B18C00F0C2EF /* MockInject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7DAC51A41714B18C00F0C2EF /* MockInject.h */; };
-		7DAC51A71714B18C00F0C2EF /* MockInject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51A61714B18C00F0C2EF /* MockInject.m */; };
+		7DAC51AF1714B1BA00F0C2EF /* MIMockMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51AE1714B1BA00F0C2EF /* MIMockMap.m */; };
+		7DAC51B21714B1C700F0C2EF /* MIMocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51B11714B1C700F0C2EF /* MIMocker.m */; };
+		7DAC51B51714B1DF00F0C2EF /* MISwizzledMethodVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51B41714B1DF00F0C2EF /* MISwizzledMethodVO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -19,7 +20,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				7DAC51A51714B18C00F0C2EF /* MockInject.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -29,8 +29,12 @@
 		7DAC519C1714B18C00F0C2EF /* libMockInject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMockInject.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DAC519F1714B18C00F0C2EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7DAC51A31714B18C00F0C2EF /* MockInject-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MockInject-Prefix.pch"; sourceTree = "<group>"; };
-		7DAC51A41714B18C00F0C2EF /* MockInject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockInject.h; sourceTree = "<group>"; };
-		7DAC51A61714B18C00F0C2EF /* MockInject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockInject.m; sourceTree = "<group>"; };
+		7DAC51AD1714B1BA00F0C2EF /* MIMockMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIMockMap.h; sourceTree = "<group>"; };
+		7DAC51AE1714B1BA00F0C2EF /* MIMockMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIMockMap.m; sourceTree = "<group>"; };
+		7DAC51B01714B1C700F0C2EF /* MIMocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIMocker.h; sourceTree = "<group>"; };
+		7DAC51B11714B1C700F0C2EF /* MIMocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIMocker.m; sourceTree = "<group>"; };
+		7DAC51B31714B1DF00F0C2EF /* MISwizzledMethodVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MISwizzledMethodVO.h; sourceTree = "<group>"; };
+		7DAC51B41714B1DF00F0C2EF /* MISwizzledMethodVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MISwizzledMethodVO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +77,13 @@
 		7DAC51A11714B18C00F0C2EF /* MockInject */ = {
 			isa = PBXGroup;
 			children = (
-				7DAC51A41714B18C00F0C2EF /* MockInject.h */,
-				7DAC51A61714B18C00F0C2EF /* MockInject.m */,
 				7DAC51A21714B18C00F0C2EF /* Supporting Files */,
+				7DAC51AD1714B1BA00F0C2EF /* MIMockMap.h */,
+				7DAC51AE1714B1BA00F0C2EF /* MIMockMap.m */,
+				7DAC51B01714B1C700F0C2EF /* MIMocker.h */,
+				7DAC51B11714B1C700F0C2EF /* MIMocker.m */,
+				7DAC51B31714B1DF00F0C2EF /* MISwizzledMethodVO.h */,
+				7DAC51B41714B1DF00F0C2EF /* MISwizzledMethodVO.m */,
 			);
 			path = MockInject;
 			sourceTree = "<group>";
@@ -139,7 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DAC51A71714B18C00F0C2EF /* MockInject.m in Sources */,
+				7DAC51AF1714B1BA00F0C2EF /* MIMockMap.m in Sources */,
+				7DAC51B21714B1C700F0C2EF /* MIMocker.m in Sources */,
+				7DAC51B51714B1DF00F0C2EF /* MISwizzledMethodVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
