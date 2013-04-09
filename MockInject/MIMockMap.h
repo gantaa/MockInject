@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 FitNerds. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface MIMockMap : NSObject
 
 + (void)setObject:(id)object forKey:(id<NSCopying>)aKey;

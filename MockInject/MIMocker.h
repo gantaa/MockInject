@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 FitNerds. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface MIMocker : NSObject
 
 + (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector;
