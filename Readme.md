@@ -1,7 +1,7 @@
 # Overview
 
 MockInject allows developers who use the Kiwi testing framework to globally mock any Objective C class by overriding the init method of the developer's choice.  Without this library, objects that are instantiated and initialized internally in a class cannot be mocked up or asserted unless the developer makes the object a public property or creates a public method for instantiation and overrides the method with the use of a Categories.  Here is an example of something one would mock with the MockInject library:
-	
+    
 	//private class method
 	- (void)showAlert{
 		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Log in Failed"
@@ -33,6 +33,15 @@ in your project directory.  Here is an example of myproject's PodFile that uses 
     end
     
 You can also just pull from this git repo and try to hook up the static library to your project.  Consult Apple's static library documentation for how to do this.  I couldn't get it to work, but if you're reading this, you're probably smart!
+
+#Troubleshooting
+###Memory errors when creating mocks
+If you receive EXC_BAD_ACCESS errors with some of your mocks and more complicated specs, it could be due to MockInject uses ARC and Kiwi does not.  It tries to autorelease some of your stored mocks and then ARC throws an error when it tries to clean things up.  If your mock is named myMock, a workaround for this would be to add:
+
+    CFRetain((__bridge CFTypeRef)(myMock));
+
+after instantiating the mock.  Your project must be an ARC project to do this.
+
 
 # API Documentation and Usage
 
