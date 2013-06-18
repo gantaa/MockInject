@@ -16,17 +16,37 @@
 
 static NSMutableDictionary *originalImplementations;
 
+id initMethod(id self, SEL _cmd){
+    return [self alloc];
+}
+
++ (void)checkClass:(Class)clazz forSelector:(SEL)initSelector{
+    unsigned int count;
+    BOOL hasInitMethod = NO;
+    Method * methodList = class_copyMethodList(clazz, &count);
+    for(int i = 0; i < count; i++){
+        if(method_getName(methodList[i]) == initSelector){
+            hasInitMethod = YES;
+        }
+    }
+    if(!hasInitMethod)
+        class_addMethod(clazz, initSelector, (IMP)initMethod, "@@:");
+}
+
 + (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector{
+    [self checkClass:clazz forSelector:initSelector];
     [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:[self class] overrideSelector:@selector(overrideInit) isClassMethod:NO];
     return [self getMockForClass:clazz];
 }
 
 + (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector{
+    [self checkClass:clazz forSelector:initSelector];
     [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:overrideSelector isClassMethod:NO];
     return [self getMockForClass:clazz];
 }
 
 + (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector{
+    [self checkClass:clazz forSelector:initSelector];
     [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:overrideSelector isClassMethod:YES];
     return [self getMockForClass:clazz];
 }
