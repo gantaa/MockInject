@@ -17,7 +17,9 @@
 static NSMutableDictionary *originalImplementations;
 
 id initMethod(id self, SEL _cmd){
-    return [self alloc];
+    Class theSuper = [self superclass];
+    IMP superImp = [theSuper instanceMethodForSelector: _cmd];
+    return superImp(self,_cmd);
 }
 
 + (void)checkClass:(Class)clazz forSelector:(SEL)initSelector{
