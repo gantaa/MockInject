@@ -41,15 +41,15 @@ id initMethod(id self, SEL _cmd){
     return [self getMockForClass:clazz];
 }
 
-+ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector{
++ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass{
     [self checkClass:clazz forSelector:initSelector];
-    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:overrideSelector isClassMethod:NO];
+    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:initSelector isClassMethod:NO];
     return [self getMockForClass:clazz];
 }
 
-+ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector{
++ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass{
     [self checkClass:clazz forSelector:initSelector];
-    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:overrideSelector isClassMethod:YES];
+    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:overrideClass overrideSelector:initSelector isClassMethod:YES];
     return [self getMockForClass:clazz];
 }
 
