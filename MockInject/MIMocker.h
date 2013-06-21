@@ -9,8 +9,8 @@
 @interface MIMocker : NSObject
 
 + (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector;
-+ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector;
-+ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector;
++ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass;
++ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass;
 + (void)undoMockForClass:(Class)clazz;
 
 @end
