@@ -65,24 +65,22 @@ Use this method to override any non-static init method that takes no arguments.
 + initSelector - The selector for the init method with no arguments you wish to replace and return a mock.
 + returns: The same KWMock object returned for any future call of the provided initSelector.
 
-<pre><code>+ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector</code></pre>
+<pre><code>+ (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass</code></pre>
 
-Use this method to override any non-static init method that does take arguments.  In this case you must provide your own override selector that returns a KWMock.  You can call the original init method in your provided selector so that the init arguments can be asserted in the mock later on.
+Use this method to override any non-static init method that does take arguments.  The override class must contain an identical init selector to the one you wish to have mocked.
 
 + clazz - The Class object for which you wish to override an init method
 + initSelector - The selector for the init method you wish to replace and return a mock.
 + overrideClass - The Class object that owns the method you will replace the init method with.
-+ overrideSelector - The selector of the method to override initialization with
 + returns: The same KWMock object returned for any future call of the provided initSelector.
 
-<pre><code>+ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass overrideSelector:(SEL)overrideSelector</code></pre>
+<pre><code>+ (id)classMockForClass:(Class)clazz initSelector:(SEL)initSelector overrideClass:(Class)overrideClass</code></pre>
 
-Use this method to override any STATIC init method (with or without arguments).  You must provide your own override selector that returns a KWMock.  You can call the original init method in your provided selector if you wish to assert the argument values in the mock later on.
+Use this method to override any STATIC init method (with or without arguments).  The override class must contain an identical init selector to the one you wish to have mocked.
 
 + clazz - The Class object for which you wish to override an init method
 + initSelector - The selector for the init method you wish to replace and return a mock.
 + overrideClass - The Class object that owns the method you will replace the init method with.
-+ overrideSelector - The selector of the method to override initialization with
 + returns: The same KWMock object returned for any future call of the provided initSelector.
 
 ### Class MIMockMap
@@ -201,10 +199,6 @@ Class to hold override Selectors:
 
 @implementation MockSelectors
 
-+ (SEL)MyOtherClassSelector{
-    return @selector(initWithId:);
-}
-
 - (id)initWithId:(NSString *)identifier{
 	//self is actually MyOther class after this method gets Swizzled by MockInject
     id mock = [MIMockMap objectForKey:NSStringFromClass([self class])];
@@ -234,7 +228,7 @@ describe(@"doSomething", ^{
     
     beforeEach(^{
         myClass = [[MyClass alloc] init];
-        myOtherClassMock = objectManagerMock = [MIMocker globalMockForClass:[MyOtherClass class] initSelector:@selector(initWithId:) overrideClass:[MockSelectors class] overrideSelector:[MockSelectors MyOtherClassSelector]];
+        myOtherClassMock = objectManagerMock = [MIMocker globalMockForClass:[MyOtherClass class] initSelector:@selector(initWithId:) overrideClass:[MockSelectors class]];
     });
     
     it(@"delegatesToOtherClass", ^{
@@ -253,7 +247,7 @@ SPEC_END
 </code></pre>
 
 ### Mock a non-static init method that has arguments:
-Same as the previous example, but the selector in MockSelectors should be a  class method (+) and the classMockForClass:initSelector:overrideClass:overrideSelector: method should be used on MIMocker instead.
+Same as the previous example, but the selector in MockSelectors should be a class method (+) and the classMockForClass:initSelector:overrideClass: method should be used on MIMocker instead.
 
 # You want more?
 This is just the surface of what can be accomplished with these types of Mocks.  Once you have a hold of the mock in your spec, you can do anything Kiwi will allow such as stubs, complex assertions, and more.  Consult the [Kiwi Wiki](https://github.com/allending/Kiwi/wiki) for more information on testing with Kiwi.  IOS developers aren't better than everyone else.  TEST YOUR CODE! You'll be glad you did.
