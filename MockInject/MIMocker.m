@@ -22,6 +22,10 @@ id initMethod(id self, SEL _cmd){
     return superImp(self,_cmd);
 }
 
+id overrideInit(id self,SEL _cmd){
+    return [MIMockMap objectForKey:NSStringFromClass([self class])];
+}
+
 + (void)checkClass:(Class)clazz forSelector:(SEL)initSelector{
     unsigned int count;
     BOOL hasInitMethod = NO;
@@ -37,7 +41,9 @@ id initMethod(id self, SEL _cmd){
 
 + (id)globalMockForClass:(Class)clazz initSelector:(SEL)initSelector{
     [self checkClass:clazz forSelector:initSelector];
-    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:[self class] overrideSelector:@selector(overrideInit) isClassMethod:NO];
+    SEL randomSelector = NSSelectorFromString([[NSUUID UUID] UUIDString]);
+    class_addMethod([MIMocker class], randomSelector, (IMP)overrideInit, "@@:");
+    [self swizzleMethodForClass:clazz origSelector:initSelector overrideClass:[self class] overrideSelector:randomSelector isClassMethod:NO];
     return [self getMockForClass:clazz];
 }
 
@@ -58,8 +64,8 @@ id initMethod(id self, SEL _cmd){
     class_getClassMethod(clazz, origSelector) :
     class_getInstanceMethod(clazz, origSelector);
     Method overrideMethod = isClassMethod ?
-    class_getClassMethod(overrideClass, overrideSelector) :
-    class_getInstanceMethod(overrideClass, overrideSelector);
+        class_getClassMethod(overrideClass, overrideSelector) :
+        class_getInstanceMethod(overrideClass, overrideSelector);
     [self storeUndoMock:origMethod overriderMethod:overrideMethod forClass:clazz];
     if(!isClassMethod && class_addMethod(clazz, origSelector, method_getImplementation(overrideMethod), method_getTypeEncoding(overrideMethod))){
         class_replaceMethod(clazz, overrideSelector, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
@@ -84,10 +90,6 @@ id initMethod(id self, SEL _cmd){
     id mock = [KWMock nullMockForClass:clazz];
     [MIMockMap setObject:mock forKey:NSStringFromClass(clazz)];
     return mock;
-}
-
-- (id)overrideInit{
-    return [MIMockMap objectForKey:NSStringFromClass([self class])];
 }
 
 @end
