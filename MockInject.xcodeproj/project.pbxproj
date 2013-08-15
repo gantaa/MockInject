@@ -11,6 +11,7 @@
 		7DAC51AF1714B1BA00F0C2EF /* MIMockMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51AE1714B1BA00F0C2EF /* MIMockMap.m */; };
 		7DAC51B21714B1C700F0C2EF /* MIMocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51B11714B1C700F0C2EF /* MIMocker.m */; };
 		7DAC51B51714B1DF00F0C2EF /* MISwizzledMethodVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC51B41714B1DF00F0C2EF /* MISwizzledMethodVO.m */; };
+		C9612C0B17BC7DE400695707 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9612C0A17BC7DE400695707 /* SenTestingKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		7DAC51B11714B1C700F0C2EF /* MIMocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIMocker.m; sourceTree = "<group>"; };
 		7DAC51B31714B1DF00F0C2EF /* MISwizzledMethodVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MISwizzledMethodVO.h; sourceTree = "<group>"; };
 		7DAC51B41714B1DF00F0C2EF /* MISwizzledMethodVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MISwizzledMethodVO.m; sourceTree = "<group>"; };
+		C9612C0A17BC7DE400695707 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9612C0B17BC7DE400695707 /* SenTestingKit.framework in Frameworks */,
 				7DAC51A01714B18C00F0C2EF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +72,7 @@
 		7DAC519E1714B18C00F0C2EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9612C0A17BC7DE400695707 /* SenTestingKit.framework */,
 				7DAC519F1714B18C00F0C2EF /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -213,6 +217,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/MockInject.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MockInject/MockInject-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
@@ -225,6 +233,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/MockInject.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MockInject/MockInject-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
@@ -252,6 +264,7 @@
 				7DAC51AC1714B18C00F0C2EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
