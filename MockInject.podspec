@@ -12,4 +12,21 @@ Pod::Spec.new do |s|
   s.public_header_files = 'MockInject/**/*.h'
   s.requires_arc = true
   s.dependency 'Kiwi'
+
+  # TODO: clean this up once Apple gets their stuff together
+  s.ios.xcconfig = {
+    "FRAMEWORK_SEARCH_PATHS" => %w[
+      $(SDKROOT)/Developer/Library/Frameworks
+      $(inherited)
+      $(DEVELOPER_FRAMEWORKS_DIR)
+    ].join(' '),
+    "FRAMEWORK_SEARCH_PATHS[sdk=iphoneos8.0]" => %w[
+      $(inherited)
+      $(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/Library/Frameworks
+    ].join(' '),
+    "FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator8.0]" => %w[
+      $(inherited)
+      $(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks
+    ].join(' '),
+  }
 end
