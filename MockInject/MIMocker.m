@@ -19,7 +19,7 @@ static NSMutableDictionary *originalImplementations;
 id initMethod(id self, SEL _cmd){
     Class theSuper = [self superclass];
     IMP superImp = [theSuper instanceMethodForSelector: _cmd];
-    return superImp(self,_cmd);
+    return ((id (*)(id, SEL))superImp)(self,_cmd);
 }
 
 id overrideInit(id self,SEL _cmd){
